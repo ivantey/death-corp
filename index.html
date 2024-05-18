@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Death Corp</title>
+    <title>Death Corp - Official Website</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <style>
         body {
@@ -11,17 +11,17 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; 
+            justify-content: flex-start; /* Начинаем выравнивание сверху */
             align-items: center;
             height: 100vh;
             background-color: black;
             color: white;
             font-family: 'Roboto', sans-serif;
             text-align: center;
-            visibility: hidden; 
+            visibility: hidden; /* Скрываем контент до полной загрузки шрифта */
         }
         body.font-loaded {
-            visibility: visible; 
+            visibility: visible; /* Показываем контент после загрузки шрифта */
         }
         main {
             margin-top: 20vh; /* Отступ сверху для перемещения текста ближе к верху */
@@ -31,7 +31,7 @@
         }
         footer {
             margin-top: 20px;
-            font-size: 1em;
+            font-size: 0.8em; /* Уменьшаем размер шрифта для email */
             color: #888;
             position: absolute;
             bottom: 10px;
@@ -41,7 +41,7 @@
         }
         .copyright {
             margin-top: 10px;
-            font-size: 0.8em;
+            font-size: 0.7em; /* Уменьшаем размер шрифта для копирайта */
             color: white;
             opacity: 0.5;
         }
