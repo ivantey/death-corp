@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Death Corp - Official Website</title>
+    <title>Death-corp</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
     <style>
         body {
@@ -11,44 +11,43 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Начинаем выравнивание сверху */
+            justify-content: flex-start; 
             align-items: center;
             height: 100vh;
             background-color: black;
             color: white;
             font-family: 'Roboto', sans-serif;
             text-align: center;
-            visibility: hidden; /* Скрываем контент до полной загрузки шрифта */
+            visibility: hidden; 
         }
         body.font-loaded {
-            visibility: visible; /* Показываем контент после загрузки шрифта */
+            visibility: visible; 
         }
         main {
-            margin-top: 25vh; /* Отступ сверху для перемещения текста ближе к верху */
+            margin-top: 25vh; 
             font-size: 3em;
             letter-spacing: 0.05em;
             font-weight: 100;
         }
         footer {
             margin-top: 30px;
-            font-size: 1em; /* Размер шрифта для email */
+            font-size: 1em; 
             color: #888;
             position: absolute;
             bottom: 30px;
             text-align: center;
             width: 100%;
-            font-weight: 300; /* Используем более тонкий шрифт для нижнего текста */
+            font-weight: 300; 
         }
         .copyright {
             margin-top: 10px;
-            font-size: 0.9em; /* Размер шрифта для копирайта */
+            font-size: 0.9em; 
             color: white;
             opacity: 0.5;
-            font-weight: 300; /* Используем более тонкий шрифт для копирайта */
+            font-weight: 300; 
         }
     </style>
     <script>
-        // Проверяем, загрузился ли шрифт
         document.fonts.ready.then(function() {
             document.body.classList.add('font-loaded');
         });
@@ -61,7 +60,7 @@
     <footer>
         <p>help@death-corp.com</p>
         <div class="copyright">
-            © 2024 Death Corp. All rights reserved.
+            © 2022 Death-corp. All rights reserved.
         </div>
     </footer>
 </body>
