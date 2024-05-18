@@ -11,7 +11,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start; /* Начинаем выравнивание сверху */
             align-items: center;
             height: 100vh;
             background-color: black;
@@ -24,6 +24,7 @@
             visibility: visible; /* Показываем контент после загрузки шрифта */
         }
         main {
+            margin-top: 20vh; /* Отступ сверху для перемещения текста ближе к верху */
             font-size: 2em;
             letter-spacing: 0.1em;
             font-weight: 100;
