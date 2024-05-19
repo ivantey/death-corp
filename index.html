@@ -28,6 +28,58 @@
             font-size: 3em;
             letter-spacing: 0.05em;
             font-weight: 100;
+            position: relative;
+        }
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            animation: glitch 2s infinite;
+        }
+        .glitch::before {
+            left: 2px;
+            text-shadow: -2px 0 red;
+            animation: glitch-before 2s infinite;
+        }
+        .glitch::after {
+            left: -2px;
+            text-shadow: -2px 0 blue;
+            animation: glitch-after 2s infinite;
+        }
+        @keyframes glitch {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            20% { clip: rect(12px, 9999px, 15px, 0); }
+            40% { clip: rect(32px, 9999px, 35px, 0); }
+            60% { clip: rect(22px, 9999px, 24px, 0); }
+            80% { clip: rect(12px, 9999px, 14px, 0); }
+            100% { clip: rect(42px, 9999px, 44px, 0); }
+        }
+        @keyframes glitch-before {
+            0% { clip: rect(72px, 9999px, 75px, 0); }
+            20% { clip: rect(32px, 9999px, 35px, 0); }
+            40% { clip: rect(52px, 9999px, 55px, 0); }
+            60% { clip: rect(22px, 9999px, 25px, 0); }
+            80% { clip: rect(42px, 9999px, 45px, 0); }
+            100% { clip: rect(72px, 9999px, 75px, 0); }
+        }
+        @keyframes glitch-after {
+            0% { clip: rect(12px, 9999px, 14px, 0); }
+            20% { clip: rect(22px, 9999px, 25px, 0); }
+            40% { clip: rect(42px, 9999px, 45px, 0); }
+            60% { clip: rect(32px, 9999px, 35px, 0); }
+            80% { clip: rect(52px, 9999px, 55px, 0); }
+            100% { clip: rect(12px, 9999px, 14px, 0); }
         }
         footer {
             margin-top: 30px;
@@ -51,11 +103,28 @@
         document.fonts.ready.then(function() {
             document.body.classList.add('font-loaded');
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const phrases = [
+                'dɇa†h, i†’s e∆sy',
+                'conquer complexity',
+                'innovate. integrate. dominate.',
+                'empowering the future'
+            ];
+            const glitchElement = document.querySelector('.glitch');
+            let currentIndex = 0;
+
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % phrases.length;
+                glitchElement.setAttribute('data-text', phrases[currentIndex]);
+                glitchElement.textContent = phrases[currentIndex];
+            }, 10000);
+        });
     </script>
 </head>
 <body>
     <main>
-        <p>dɇa†h, i†’s e∆sy</p>
+        <p class="glitch" data-text="dɇa†h, i†’s e∆sy">dɇa†h, i†’s e∆sy</p>
     </main>
     <footer>
         <p>help@death-corp.com</p>
