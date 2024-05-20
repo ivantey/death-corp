@@ -32,9 +32,16 @@
             flex-direction: column;
             align-items: center;
         }
+        .line {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            position: relative;
+        }
         .glitch {
             position: relative;
             display: inline-block;
+            text-align: right; /* Выравнивание первого слова по правому краю */
         }
         .glitch-letter {
             position: relative;
@@ -87,16 +94,9 @@
             50% { opacity: 1; }
             100% { opacity: 0; }
         }
-        .line {
-            display: flex;
-            justify-content: center;
-            align-items: baseline;
-            position: relative;
-        }
         .fixed-container {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            position: relative;
+            margin-left: 10px; /* Сместим элемент ", i†’s" правее */
         }
         .fixed-word2 {
             white-space: nowrap;
@@ -184,7 +184,9 @@
 <body>
     <main>
         <div class="line">
-            <span class="glitch glitch-word1" data-text="dɇa†h">dɇa†h</span>
+            <div class="glitch" style="text-align: right;">
+                <span class="glitch-word1" data-text="dɇa†h">dɇa†h</span>
+            </div>
             <div class="fixed-container">
                 <span class="fixed-word2">, i†’s</span>
                 <div class="line">
