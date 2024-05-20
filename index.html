@@ -11,7 +11,7 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Сдвигаем контент вверх */
+            justify-content: flex-start;
             align-items: center;
             height: 100vh;
             background-color: black;
@@ -24,7 +24,7 @@
             visibility: visible;
         }
         main {
-            margin-top: 20vh; /* Сдвигаем контент вверх на 20% */
+            margin-top: 20vh;
             font-size: 3em;
             letter-spacing: 0.05em;
             font-weight: 100;
@@ -125,12 +125,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             const phrases = [
                 { word1: 'dɇa†h', word2: 'i†’s' },
-                { word1: 'd∆ηcɇ', word2: 'i†’s' }
+                { word1: 'd∆ηcɇ', word2: 'i†’s' },
+                { word1: 'h@ck', word2: 'i†’s' },
+                { word1: 'c0dɇ', word2: 'i†’s' },
+                { word1: 'r0b0†', word2: 'i†’s' }
             ];
 
-            const letters = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+{}|:"<>?'.split('');
+            const letters = 'aᴀbcdɕefgᶍhɨiᴊkłmnɲopqrřsŧtuᴜvwʍxɏyȥ0#$%^&*_'.split('');
             let currentIndex = 0;
-            let previousIndex = phrases.length - 1; // Start with the last phrase
+            let previousIndex = phrases.length - 1;
             const word1Element = document.querySelector('.glitch-word1');
 
             function createGlitchText(text, maxLength) {
@@ -152,7 +155,7 @@
                     clearInterval(interval);
                     letterElement.textContent = finalLetter;
                     letterElement.setAttribute('data-text', finalLetter);
-                }, 1000); // Adjust duration to match the desired slot machine effect
+                }, 1000);
             }
 
             function updateText() {
@@ -173,8 +176,20 @@
                 });
             }
 
-            setInterval(updateText, 10000);
-            updateText();
+            // Set initial text to "dɇa†h" and then start the cycle
+            function setInitialText() {
+                const initialText = 'dɇa†h'.split('');
+                const maxLength = initialText.length;
+
+                word1Element.innerHTML = createGlitchText('dɇa†h', maxLength);
+            }
+
+            setInitialText();
+            setTimeout(() => {
+                setInterval(updateText, 10000);
+                updateText();
+            }, 10000); // Delay before starting the cycle
+
         });
     </script>
 </head>
