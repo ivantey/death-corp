@@ -32,11 +32,6 @@
             flex-direction: column;
             align-items: center;
         }
-        .line {
-            display: flex;
-            justify-content: center;
-            align-items: baseline;
-        }
         .glitch {
             position: relative;
             display: inline-block;
@@ -92,6 +87,20 @@
             50% { opacity: 1; }
             100% { opacity: 0; }
         }
+        .line {
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            position: relative;
+        }
+        .fixed-container {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .fixed-word2 {
+            white-space: nowrap;
+        }
         footer {
             margin-top: auto;
             font-size: 1em;
@@ -126,7 +135,6 @@
             let previousIndex = phrases.length - 1; // Start with the last phrase
             const word1Element = document.querySelector('.glitch-word1');
             const word2Element = document.querySelector('.fixed-word2');
-            const word3Element = document.querySelector('.fixed-word3');
 
             function createGlitchText(text, maxLength) {
                 let paddedText = text.padEnd(maxLength, ' ');
@@ -177,10 +185,12 @@
     <main>
         <div class="line">
             <span class="glitch glitch-word1" data-text="dɇa†h">dɇa†h</span>
-            <span class="fixed-word2">, i†’s</span>
-        </div>
-        <div class="line">
-            <span class="fixed-word3">e∆sy</span>
+            <div class="fixed-container">
+                <span class="fixed-word2">, i†’s</span>
+                <div class="line">
+                    <span class="fixed-word3">e∆sy</span>
+                </div>
+            </div>
         </div>
     </main>
     <footer>
