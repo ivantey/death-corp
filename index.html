@@ -37,7 +37,6 @@
         .glitch-letter {
             position: relative;
             display: inline-block;
-            animation: letterScroll 0.1s infinite;
         }
         .glitch-letter::before,
         .glitch-letter::after {
@@ -86,18 +85,14 @@
             80% { clip: rect(20px, 9999px, 25px, 0); }
             100% { clip: rect(15px, 9999px, 20px, 0); }
         }
-        @keyframes letterScroll {
-            0% { content: 'a'; }
-            10% { content: 'b'; }
-            20% { content: 'c'; }
-            30% { content: 'd'; }
-            40% { content: 'e'; }
-            50% { content: 'f'; }
-            60% { content: 'g'; }
-            70% { content: 'h'; }
-            80% { content: 'i'; }
-            90% { content: 'j'; }
-            100% { content: 'k'; }
+        .scrolling-letters {
+            display: inline-block;
+            animation: scroll 0.5s linear infinite;
+        }
+        @keyframes scroll {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
         }
         footer {
             margin-top: 30px;
@@ -131,6 +126,7 @@
             let currentIndex = 0;
             const word1Element = document.querySelector('.glitch-word1');
             const word2Element = document.querySelector('.glitch-word2');
+            const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
 
             function createGlitchText(text) {
                 return text.split('').map(letter => {
@@ -138,18 +134,27 @@
                 }).join('');
             }
 
+            function startScrollAnimation(element) {
+                element.classList.add('scrolling-letters');
+                setTimeout(() => {
+                    element.classList.remove('scrolling-letters');
+                }, 500); // Match the duration of the scroll animation
+            }
+
             function updateText() {
                 currentIndex = (currentIndex + 1) % phrases.length;
+                const newWord1 = phrases[currentIndex].word1.split('');
                 word1Element.innerHTML = createGlitchText(phrases[currentIndex].word1);
                 word2Element.textContent = phrases[currentIndex].word2;
-                setTimeout(() => {
-                    const letters = word1Element.querySelectorAll('.glitch-letter');
-                    letters.forEach(letter => {
-                        letter.style.animation = 'none';
-                        letter.offsetHeight; // trigger reflow
-                        letter.style.animation = '';
-                    });
-                }, 1000); // duration of letterScroll animation
+
+                const glitchLetters = word1Element.querySelectorAll('.glitch-letter');
+                glitchLetters.forEach((letter, index) => {
+                    startScrollAnimation(letter);
+                    setTimeout(() => {
+                        letter.textContent = newWord1[index];
+                        letter.setAttribute('data-text', newWord1[index]);
+                    }, 500);
+                });
             }
 
             setInterval(updateText, 10000);
