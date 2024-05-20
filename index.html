@@ -123,10 +123,10 @@
                 { word1: 'd∆ηcɇ', word2: 'i†’s e∆sy' }
             ];
 
+            const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
             let currentIndex = 0;
             const word1Element = document.querySelector('.glitch-word1');
             const word2Element = document.querySelector('.glitch-word2');
-            const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
 
             function createGlitchText(text) {
                 return text.split('').map(letter => {
@@ -134,11 +134,17 @@
                 }).join('');
             }
 
-            function startScrollAnimation(element) {
-                element.classList.add('scrolling-letters');
+            function startScrollAnimation(letterElement, finalLetter) {
+                const interval = setInterval(() => {
+                    const randomLetter = letters[Math.floor(Math.random() * letters.length)];
+                    letterElement.textContent = randomLetter;
+                }, 50);
+                
                 setTimeout(() => {
-                    element.classList.remove('scrolling-letters');
-                }, 500); // Match the duration of the scroll animation
+                    clearInterval(interval);
+                    letterElement.textContent = finalLetter;
+                    letterElement.setAttribute('data-text', finalLetter);
+                }, 1000); // Adjust duration to match the desired slot machine effect
             }
 
             function updateText() {
@@ -149,11 +155,7 @@
 
                 const glitchLetters = word1Element.querySelectorAll('.glitch-letter');
                 glitchLetters.forEach((letter, index) => {
-                    startScrollAnimation(letter);
-                    setTimeout(() => {
-                        letter.textContent = newWord1[index];
-                        letter.setAttribute('data-text', newWord1[index]);
-                    }, 500);
+                    startScrollAnimation(letter, newWord1[index]);
                 });
             }
 
