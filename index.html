@@ -34,12 +34,16 @@
         }
         .line {
             display: flex;
-            justify-content: flex-end;
+            justify-content: center;
             align-items: baseline;
             position: relative;
         }
         .glitch {
             position: relative;
+            display: inline-block;
+            text-align: right; /* Выравнивание первого слова по правому краю */
+        }
+        .glitch-word1 {
             display: inline-block;
             text-align: right;
         }
@@ -96,18 +100,19 @@
         }
         .fixed-container {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
         }
         .fixed-word2 {
-            margin-right: 10px; /* Подвиньте здесь, изменяя значение */
-        }
-        .fixed-word2,
-        .fixed-word3 {
+            margin-left: 10px; /* Подвиньте здесь, изменяя значение */
             white-space: nowrap;
+        }
+        .fixed-word3 {
+            display: block;
+            text-align: center;
+            width: 100%;
         }
         footer {
             margin-top: auto;
@@ -190,8 +195,8 @@
 </head>
 <body>
     <main>
-        <div class="line" style="position: relative;">
-            <div class="glitch" style="text-align: right;">
+        <div class="line">
+            <div class="glitch">
                 <span class="glitch-word1" data-text="dɇa†h">dɇa†h</span>
             </div>
             <div class="fixed-container">
