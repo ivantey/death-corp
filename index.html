@@ -34,14 +34,14 @@
         }
         .line {
             display: flex;
-            justify-content: center;
+            justify-content: flex-end;
             align-items: baseline;
             position: relative;
         }
         .glitch {
             position: relative;
             display: inline-block;
-            text-align: right; /* Выравнивание первого слова по правому краю */
+            text-align: right;
         }
         .glitch-letter {
             position: relative;
@@ -102,9 +102,10 @@
             left: 50%;
             transform: translateX(-50%);
         }
-        .fixed-word2{
-            margin-right: 20px; 
-        },
+        .fixed-word2 {
+            margin-right: 10px; /* Подвиньте здесь, изменяя значение */
+        }
+        .fixed-word2,
         .fixed-word3 {
             white-space: nowrap;
         }
