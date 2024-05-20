@@ -124,9 +124,10 @@
     </style>
     <script>
         // Конфигурационные переменные
-        const initialDelay = 20000; // Время до начала эффекта после загрузки страницы (в миллисекундах)
-        const glitchEffectDuration = [1000, 5000]; // Массив с двумя числами: минимум и максимум длительности глитч эффекта (в миллисекундах)
-        const slotMachineCycle = 10000; // Время до следующей смены букв (в миллисекундах)
+        const initialDelay = 10000; // Время до начала эффекта после загрузки страницы (в миллисекундах)
+        const glitchEffectDuration = [500, 7000]; // Массив с двумя числами: минимум и максимум длительности глитч эффекта (в миллисекундах)
+        const slotMachineCycle = 5000; // Время до следующей смены букв (в миллисекундах)
+        const slotMachineEffectDuration = 500; // Длительность эффекта смены букв (в миллисекундах)
 
         document.fonts.ready.then(function() {
             document.body.classList.add('font-loaded');
@@ -136,7 +137,6 @@
             const phrases = [
                 { word1: 'dɇa†h', word2: 'i†’s' },
                 { word1: 'd∆ηcɇ', word2: 'i†’s' },
-                { word1: 'h@ck', word2: 'i†’s' },
                 { word1: 'c0dɇ', word2: 'i†’s' },
                 { word1: 'r0b0†', word2: 'i†’s' }
             ];
@@ -165,7 +165,7 @@
                     clearInterval(interval);
                     letterElement.textContent = finalLetter;
                     letterElement.setAttribute('data-text', finalLetter);
-                }, 1000);
+                }, slotMachineEffectDuration);
             }
 
             function updateText() {
@@ -197,8 +197,10 @@
                 word1Element.classList.add('glitch-active');
                 const randomGlitchDuration = Math.random() * (glitchEffectDuration[1] - glitchEffectDuration[0]) + glitchEffectDuration[0];
                 setTimeout(() => {
-                    word1Element.classList.remove('glitch-active');
                     updateText();
+                    setTimeout(() => {
+                        word1Element.classList.remove('glitch-active');
+                    }, slotMachineEffectDuration); // Длительность эффекта смены букв
                 }, randomGlitchDuration); // Длительность каждого глитч эффекта
             }
 
@@ -222,7 +224,7 @@
                 <span class="glitch-word1" data-text="dɇa†h">dɇa†h</span>
                 <span class="fixed-word2">, i†’s</span>
             </div>
-                </div>
+        </div>
         <div class="line">
             <span class="fixed-word3">e∆sy</span>
         </div>
@@ -235,4 +237,3 @@
     </footer>
 </body>
 </html>
-
