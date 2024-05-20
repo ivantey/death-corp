@@ -49,17 +49,16 @@
             background: black;
             overflow: hidden;
             clip: rect(0, 0, 0, 0);
-            animation-duration: 2s;
-            animation-timing-function: steps(2, end);
-            animation-iteration-count: infinite;
         }
         .glitch-letter::before {
             left: 2px;
             text-shadow: -2px 0 red;
+            animation: glitch-before 2s infinite;
         }
         .glitch-letter::after {
             left: -2px;
             text-shadow: -2px 0 blue;
+            animation: glitch-after 2s infinite;
         }
         @keyframes glitch-before {
             0% { clip: rect(10px, 9999px, 15px, 0); }
@@ -124,9 +123,8 @@
             function createGlitchText(text, maxLength) {
                 let paddedText = text.padEnd(maxLength, ' ');
                 return paddedText.split('').map(letter => {
-                    const delayBefore = Math.random() * 2 + 's';
-                    const delayAfter = Math.random() * 2 + 's';
-                    return `<span class="glitch-letter" data-text="${letter}" style="animation: glitch-before 2s infinite ${delayBefore}, glitch-after 2s infinite ${delayAfter};">${letter}</span>`;
+                    const delay = Math.random() * 2 + 's';
+                    return `<span class="glitch-letter" data-text="${letter}" style="animation-delay: ${delay};">${letter}</span>`;
                 }).join('');
             }
 
