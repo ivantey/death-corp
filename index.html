@@ -24,7 +24,7 @@
             visibility: visible;
         }
         main {
-            margin-top: 18vh;
+            margin-top: 10vh;
             font-size: 3em;
             letter-spacing: 0.05em;
             font-weight: 100;
@@ -63,26 +63,37 @@
             background: black;
             overflow: hidden;
             clip: rect(0, 0, 0, 0);
+            display: none;
+        }
+        .glitch-active .glitch-letter::before,
+        .glitch-active .glitch-letter::after {
+            display: block;
         }
         .glitch-letter::before {
             left: 2px;
             text-shadow: -2px 0 red;
-            animation: glitch-before 5s infinite;
+            animation: glitch-before 0.5s steps(2, end);
         }
         .glitch-letter::after {
             left: -2px;
             text-shadow: -2px 0 blue;
-            animation: glitch-after 5s infinite;
+            animation: glitch-after 0.5s steps(2, end);
         }
         @keyframes glitch-before {
-            0%, 90% { clip: rect(10px, 9999px, 15px, 0); }
-            95% { clip: rect(20px, 9999px, 25px, 0); }
+            0% { clip: rect(0, 900px, 0, 0); }
+            20% { clip: rect(10px, 9999px, 15px, 0); }
+            40% { clip: rect(5px, 9999px, 10px, 0); }
+            60% { clip: rect(15px, 9999px, 20px, 0); }
+            80% { clip: rect(25px, 9999px, 30px, 0); }
             100% { clip: rect(10px, 9999px, 15px, 0); }
         }
         @keyframes glitch-after {
-            0%, 90% { clip: rect(25px, 9999px, 30px, 0); }
-            95% { clip: rect(5px, 9999px, 10px, 0); }
-            100% { clip: rect(25px, 9999px, 30px, 0); }
+            0% { clip: rect(0, 900px, 0, 0); }
+            20% { clip: rect(25px, 9999px, 30px, 0); }
+            40% { clip: rect(5px, 9999px, 10px, 0); }
+            60% { clip: rect(15px, 9999px, 20px, 0); }
+            80% { clip: rect(20px, 9999px, 25px, 0); }
+            100% { clip: rect(15px, 9999px, 20px, 0); }
         }
         .scrolling-letters {
             display: inline-block;
@@ -169,7 +180,6 @@
                 });
             }
 
-            // Set initial text to "dɇa†h" and then start the cycle
             function setInitialText() {
                 const initialText = 'dɇa†h'.split('');
                 const maxLength = initialText.length;
@@ -177,12 +187,25 @@
                 word1Element.innerHTML = createGlitchText('dɇa†h', maxLength);
             }
 
-            setInitialText();
-            setTimeout(() => {
-                setInterval(updateText, 10000);
-                updateText();
-            }, 10000); // Delay before starting the cycle
+            function triggerGlitchEffect() {
+                word1Element.classList.add('glitch-active');
+                setTimeout(() => {
+                    word1Element.classList.remove('glitch-active');
+                }, 1000); // 1 second glitch duration
+            }
 
+            setInitialText();
+
+            setTimeout(() => {
+                triggerGlitchEffect();
+                setTimeout(() => {
+                    triggerGlitchEffect();
+                    setTimeout(() => {
+                        updateText();
+                        setInterval(updateText, 10000); // Continue the cycle every 10 seconds
+                    }, 1000); // Delay before starting the slot machine effect
+                }, 1000); // Delay between two glitch effects
+            }, 20000); // Initial delay before starting the first glitch effect
         });
     </script>
 </head>
