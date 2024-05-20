@@ -34,8 +34,12 @@
             position: relative;
             display: inline-block;
         }
-        .glitch::before,
-        .glitch::after {
+        .glitch-letter {
+            position: relative;
+            display: inline-block;
+        }
+        .glitch-letter::before,
+        .glitch-letter::after {
             content: attr(data-text);
             position: absolute;
             top: 0;
@@ -47,39 +51,39 @@
             clip: rect(0, 0, 0, 0);
             animation: glitch 2s infinite;
         }
-        .glitch::before {
+        .glitch-letter::before {
             left: 2px;
             text-shadow: -2px 0 red;
             animation: glitch-before 2s infinite;
         }
-        .glitch::after {
+        .glitch-letter::after {
             left: -2px;
             text-shadow: -2px 0 blue;
             animation: glitch-after 2s infinite;
         }
         @keyframes glitch {
-            0% { clip: rect(42px, 9999px, 44px, 0); }
-            20% { clip: rect(12px, 9999px, 15px, 0); }
-            40% { clip: rect(32px, 9999px, 35px, 0); }
-            60% { clip: rect(22px, 9999px, 24px, 0); }
-            80% { clip: rect(12px, 9999px, 14px, 0); }
-            100% { clip: rect(42px, 9999px, 44px, 0); }
+            0% { clip: rect(0, 900px, 0, 0); }
+            20% { clip: rect(0, 900px, 0, 0); }
+            40% { clip: rect(0, 900px, 0, 0); }
+            60% { clip: rect(0, 900px, 0, 0); }
+            80% { clip: rect(0, 900px, 0, 0); }
+            100% { clip: rect(0, 900px, 0, 0); }
         }
         @keyframes glitch-before {
-            0% { clip: rect(72px, 9999px, 75px, 0); }
-            20% { clip: rect(32px, 9999px, 35px, 0); }
-            40% { clip: rect(52px, 9999px, 55px, 0); }
-            60% { clip: rect(22px, 9999px, 25px, 0); }
-            80% { clip: rect(42px, 9999px, 45px, 0); }
-            100% { clip: rect(72px, 9999px, 75px, 0); }
+            0% { clip: rect(0, 900px, 0, 0); }
+            20% { clip: rect(0, 900px, 0, 0); }
+            40% { clip: rect(0, 900px, 0, 0); }
+            60% { clip: rect(0, 900px, 0, 0); }
+            80% { clip: rect(0, 900px, 0, 0); }
+            100% { clip: rect(0, 900px, 0, 0); }
         }
         @keyframes glitch-after {
-            0% { clip: rect(12px, 9999px, 14px, 0); }
-            20% { clip: rect(22px, 9999px, 25px, 0); }
-            40% { clip: rect(42px, 9999px, 45px, 0); }
-            60% { clip: rect(32px, 9999px, 35px, 0); }
-            80% { clip: rect(52px, 9999px, 55px, 0); }
-            100% { clip: rect(12px, 9999px, 14px, 0); }
+            0% { clip: rect(0, 900px, 0, 0); }
+            20% { clip: rect(0, 900px, 0, 0); }
+            40% { clip: rect(0, 900px, 0, 0); }
+            60% { clip: rect(0, 900px, 0, 0); }
+            80% { clip: rect(0, 900px, 0, 0); }
+            100% { clip: rect(0, 900px, 0, 0); }
         }
         footer {
             margin-top: 30px;
@@ -106,25 +110,37 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             const phrases = [
-                'dɇa†h, i†’s e∆sy',
-                'conquer complexity',
-                'innovate. integrate. dominate.',
-                'empowering the future'
+                { word1: 'dɇa†h', word2: 'i†’s e∆sy' },
+                { word1: 'life', word2: 'is beautiful' },
+                { word1: 'code', word2: 'is fun' },
+                { word1: 'innovate', word2: 'and succeed' }
             ];
-            const glitchElement = document.querySelector('.glitch');
-            let currentIndex = 0;
 
-            setInterval(() => {
+            let currentIndex = 0;
+            const word1Element = document.querySelector('.glitch-word1');
+            const word2Element = document.querySelector('.glitch-word2');
+
+            function createGlitchText(text) {
+                return text.split('').map(letter => {
+                    return `<span class="glitch-letter" data-text="${letter}">${letter}</span>`;
+                }).join('');
+            }
+
+            function updateText() {
                 currentIndex = (currentIndex + 1) % phrases.length;
-                glitchElement.setAttribute('data-text', phrases[currentIndex]);
-                glitchElement.textContent = phrases[currentIndex];
-            }, 10000);
+                word1Element.innerHTML = createGlitchText(phrases[currentIndex].word1);
+                word2Element.textContent = phrases[currentIndex].word2;
+            }
+
+            setInterval(updateText, 10000);
+            updateText();
         });
     </script>
 </head>
 <body>
     <main>
-        <p class="glitch" data-text="dɇa†h, i†’s e∆sy">dɇa†h, i†’s e∆sy</p>
+        <span class="glitch glitch-word1" data-text="dɇa†h">dɇa†h</span>, 
+        <span class="glitch glitch-word2" data-text="i†’s e∆sy">i†’s e∆sy</span>
     </main>
     <footer>
         <p>help@death-corp.com</p>
