@@ -67,28 +67,22 @@
         .glitch-letter::before {
             left: 2px;
             text-shadow: -2px 0 red;
-            animation: glitch-before 2s infinite;
+            animation: glitch-before 5s infinite;
         }
         .glitch-letter::after {
             left: -2px;
             text-shadow: -2px 0 blue;
-            animation: glitch-after 2s infinite;
+            animation: glitch-after 5s infinite;
         }
         @keyframes glitch-before {
-            0% { clip: rect(10px, 9999px, 15px, 0); }
-            20% { clip: rect(20px, 9999px, 25px, 0); }
-            40% { clip: rect(5px, 9999px, 10px, 0); }
-            60% { clip: rect(15px, 9999px, 20px, 0); }
-            80% { clip: rect(25px, 9999px, 30px, 0); }
-            100% { clip: rect(5px, 9999px, 10px, 0); }
+            0%, 90% { clip: rect(10px, 9999px, 15px, 0); }
+            95% { clip: rect(20px, 9999px, 25px, 0); }
+            100% { clip: rect(10px, 9999px, 15px, 0); }
         }
         @keyframes glitch-after {
-            0% { clip: rect(25px, 9999px, 30px, 0); }
-            20% { clip: rect(5px, 9999px, 10px, 0); }
-            40% { clip: rect(15px, 9999px, 20px, 0); }
-            60% { clip: rect(10px, 9999px, 15px, 0); }
-            80% { clip: rect(20px, 9999px, 25px, 0); }
-            100% { clip: rect(15px, 9999px, 20px, 0); }
+            0%, 90% { clip: rect(25px, 9999px, 30px, 0); }
+            95% { clip: rect(5px, 9999px, 10px, 0); }
+            100% { clip: rect(25px, 9999px, 30px, 0); }
         }
         .scrolling-letters {
             display: inline-block;
@@ -131,7 +125,7 @@
                 { word1: 'r0b0†', word2: 'i†’s' }
             ];
 
-            const letters = 'aᴀbcdɕefgᶍhɨiᴊkłmnɲopqrřsŧtuᴜvwʍxɏyȥ0#$%^&*_'.split('');
+            const letters = 'abdefghknqrstvxyz23456789@#$%^*_+<>?'.split('');
             let currentIndex = 0;
             let previousIndex = phrases.length - 1;
             const word1Element = document.querySelector('.glitch-word1');
