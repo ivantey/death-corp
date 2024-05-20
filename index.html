@@ -24,7 +24,7 @@
             visibility: visible;
         }
         main {
-            margin-top: 18vh;
+            margin-top: 10vh;
             font-size: 3em;
             letter-spacing: 0.05em;
             font-weight: 100;
@@ -123,6 +123,12 @@
         }
     </style>
     <script>
+        // Конфигурационные переменные
+        const initialDelay = 20000; // Время до начала эффекта после загрузки страницы (в миллисекундах)
+        const glitchEffectCount = [2, 5]; // Массив с двумя числами: минимум и максимум глитч эффектов перед сменой букв
+        const glitchDuration = 1000; // Длительность каждого глитч эффекта (в миллисекундах)
+        const slotMachineCycle = 10000; // Время до следующей смены букв (в миллисекундах)
+
         document.fonts.ready.then(function() {
             document.body.classList.add('font-loaded');
         });
@@ -192,25 +198,32 @@
                 word1Element.classList.add('glitch-active');
                 setTimeout(() => {
                     word1Element.classList.remove('glitch-active');
-                }, 1000); // 1 second glitch duration
+                }, glitchDuration); // Длительность каждого глитч эффекта
             }
 
             setInitialText();
 
             function startCycle() {
-                const randomDelay = Math.random() * 4000 + 1000; // Random delay between 1 and 5 seconds
-                setTimeout(() => {
-                    triggerGlitchEffect();
-                    setTimeout(() => {
+                const glitchCount = Math.floor(Math.random() * (glitchEffectCount[1] - glitchEffectCount[0] + 1)) + glitchEffectCount[0];
+                let glitchIndex = 0;
+
+                function glitchAndUpdate() {
+                    if (glitchIndex < glitchCount) {
+                        triggerGlitchEffect();
+                        glitchIndex++;
+                        setTimeout(glitchAndUpdate, glitchDuration);
+                    } else {
                         updateText();
-                    }, 1000); // Delay before starting the slot machine effect
-                }, randomDelay);
+                    }
+                }
+
+                glitchAndUpdate();
             }
 
             setTimeout(() => {
                 startCycle();
-                setInterval(startCycle, 5000); // Continue the cycle every 10 seconds
-            }, 10000); // Initial delay before starting the first cycle
+                setInterval(startCycle, slotMachineCycle); // Продолжать цикл каждые 10 секунд
+            }, initialDelay); // Начальная задержка перед началом первого цикла
         });
     </script>
 </head>
