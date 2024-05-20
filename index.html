@@ -37,6 +37,7 @@
         .glitch-letter {
             position: relative;
             display: inline-block;
+            animation: letterScroll 0.1s infinite;
         }
         .glitch-letter::before,
         .glitch-letter::after {
@@ -85,6 +86,19 @@
             80% { clip: rect(20px, 9999px, 25px, 0); }
             100% { clip: rect(15px, 9999px, 20px, 0); }
         }
+        @keyframes letterScroll {
+            0% { content: 'a'; }
+            10% { content: 'b'; }
+            20% { content: 'c'; }
+            30% { content: 'd'; }
+            40% { content: 'e'; }
+            50% { content: 'f'; }
+            60% { content: 'g'; }
+            70% { content: 'h'; }
+            80% { content: 'i'; }
+            90% { content: 'j'; }
+            100% { content: 'k'; }
+        }
         footer {
             margin-top: 30px;
             font-size: 1em; 
@@ -128,6 +142,14 @@
                 currentIndex = (currentIndex + 1) % phrases.length;
                 word1Element.innerHTML = createGlitchText(phrases[currentIndex].word1);
                 word2Element.textContent = phrases[currentIndex].word2;
+                setTimeout(() => {
+                    const letters = word1Element.querySelectorAll('.glitch-letter');
+                    letters.forEach(letter => {
+                        letter.style.animation = 'none';
+                        letter.offsetHeight; // trigger reflow
+                        letter.style.animation = '';
+                    });
+                }, 1000); // duration of letterScroll animation
             }
 
             setInterval(updateText, 10000);
