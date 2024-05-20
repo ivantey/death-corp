@@ -37,15 +37,17 @@
             justify-content: center;
             align-items: baseline;
             position: relative;
+            width: 100%;
         }
         .glitch {
             position: relative;
             display: inline-block;
-            text-align: right; /* Выравнивание первого слова по правому краю */
+            text-align: right;
         }
         .glitch-word1 {
             display: inline-block;
             text-align: right;
+            white-space: nowrap;
         }
         .glitch-letter {
             position: relative;
@@ -100,17 +102,21 @@
         }
         .fixed-container {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: flex-start;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
         }
+        .fixed-line {
+            display: flex;
+            align-items: baseline;
+            white-space: nowrap;
+        }
         .fixed-word2 {
-            margin-left: 10px; /* Подвиньте здесь, изменяя значение */
             white-space: nowrap;
         }
         .fixed-word3 {
-            display: block;
             text-align: center;
             width: 100%;
         }
@@ -200,7 +206,9 @@
                 <span class="glitch-word1" data-text="dɇa†h">dɇa†h</span>
             </div>
             <div class="fixed-container">
-                <span class="fixed-word2">, i†’s</span>
+                <div class="fixed-line">
+                    <span class="fixed-word2">, i†’s</span>
+                </div>
                 <span class="fixed-word3">e∆sy</span>
             </div>
         </div>
