@@ -197,16 +197,20 @@
 
             setInitialText();
 
-            setTimeout(() => {
-                triggerGlitchEffect();
+            function startCycle() {
+                const randomDelay = Math.random() * 4000 + 1000; // Random delay between 1 and 5 seconds
                 setTimeout(() => {
                     triggerGlitchEffect();
                     setTimeout(() => {
                         updateText();
-                        setInterval(updateText, 10000); // Continue the cycle every 10 seconds
-                    }, 2000); // Delay before starting the slot machine effect
-                }, 1000); // Delay between two glitch effects
-            }, 20000); // Initial delay before starting the first glitch effect
+                    }, 1000); // Delay before starting the slot machine effect
+                }, randomDelay);
+            }
+
+            setTimeout(() => {
+                startCycle();
+                setInterval(startCycle, 10000); // Continue the cycle every 10 seconds
+            }, 20000); // Initial delay before starting the first cycle
         });
     </script>
 </head>
