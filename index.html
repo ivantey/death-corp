@@ -125,6 +125,7 @@
 
             const letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
             let currentIndex = 0;
+            let previousIndex = phrases.length - 1; // Start with the last phrase
             const word1Element = document.querySelector('.glitch-word1');
             const word2Element = document.querySelector('.glitch-word2');
 
@@ -148,14 +149,20 @@
             }
 
             function updateText() {
+                previousIndex = currentIndex;
                 currentIndex = (currentIndex + 1) % phrases.length;
+
+                const oldWord1 = phrases[previousIndex].word1.split('');
                 const newWord1 = phrases[currentIndex].word1.split('');
+
                 word1Element.innerHTML = createGlitchText(phrases[currentIndex].word1);
                 word2Element.textContent = phrases[currentIndex].word2;
 
                 const glitchLetters = word1Element.querySelectorAll('.glitch-letter');
                 glitchLetters.forEach((letter, index) => {
-                    startScrollAnimation(letter, newWord1[index]);
+                    if (oldWord1[index] !== newWord1[index]) {
+                        startScrollAnimation(letter, newWord1[index]);
+                    }
                 });
             }
 
