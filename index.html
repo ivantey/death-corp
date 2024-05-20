@@ -11,20 +11,20 @@
             padding: 0;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; 
+            justify-content: flex-start;
             align-items: center;
             height: 100vh;
             background-color: black;
             color: white;
             font-family: 'Roboto', sans-serif;
             text-align: center;
-            visibility: hidden; 
+            visibility: hidden;
         }
         body.font-loaded {
-            visibility: visible; 
+            visibility: visible;
         }
         main {
-            margin-top: 25vh; 
+            margin-top: 25vh;
             font-size: 3em;
             letter-spacing: 0.05em;
             font-weight: 100;
@@ -49,6 +49,9 @@
             background: black;
             overflow: hidden;
             clip: rect(0, 0, 0, 0);
+            animation-duration: 2s;
+            animation-timing-function: steps(2, end);
+            animation-iteration-count: infinite;
         }
         .glitch-letter::before {
             left: 2px;
@@ -59,12 +62,12 @@
             text-shadow: -2px 0 blue;
         }
         @keyframes glitch-before {
-            0% { clip: rect(20px, 9999px, 25px, 0); }
-            20% { clip: rect(15px, 9999px, 20px, 0); }
-            40% { clip: rect(10px, 9999px, 15px, 0); }
-            60% { clip: rect(5px, 9999px, 10px, 0); }
+            0% { clip: rect(10px, 9999px, 15px, 0); }
+            20% { clip: rect(20px, 9999px, 25px, 0); }
+            40% { clip: rect(5px, 9999px, 10px, 0); }
+            60% { clip: rect(15px, 9999px, 20px, 0); }
             80% { clip: rect(25px, 9999px, 30px, 0); }
-            100% { clip: rect(10px, 9999px, 15px, 0); }
+            100% { clip: rect(5px, 9999px, 10px, 0); }
         }
         @keyframes glitch-after {
             0% { clip: rect(25px, 9999px, 30px, 0); }
@@ -85,20 +88,20 @@
         }
         footer {
             margin-top: 30px;
-            font-size: 1em; 
+            font-size: 1em;
             color: #888;
             position: absolute;
             bottom: 30px;
             text-align: center;
             width: 100%;
-            font-weight: 300; 
+            font-weight: 300;
         }
         .copyright {
             margin-top: 10px;
-            font-size: 0.9em; 
+            font-size: 0.9em;
             color: white;
             opacity: 0.5;
-            font-weight: 300; 
+            font-weight: 300;
         }
     </style>
     <script>
@@ -121,8 +124,9 @@
             function createGlitchText(text, maxLength) {
                 let paddedText = text.padEnd(maxLength, ' ');
                 return paddedText.split('').map(letter => {
-                    const delay = Math.random() * 2 + 's';
-                    return `<span class="glitch-letter" data-text="${letter}" style="animation: glitch-before 2s infinite ${delay}, glitch-after 2s infinite ${delay}">${letter}</span>`;
+                    const delayBefore = Math.random() * 2 + 's';
+                    const delayAfter = Math.random() * 2 + 's';
+                    return `<span class="glitch-letter" data-text="${letter}" style="animation: glitch-before 2s infinite ${delayBefore}, glitch-after 2s infinite ${delayAfter};">${letter}</span>`;
                 }).join('');
             }
 
