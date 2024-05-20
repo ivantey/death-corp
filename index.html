@@ -85,14 +85,13 @@
             80% { clip: rect(20px, 9999px, 25px, 0); }
             100% { clip: rect(15px, 9999px, 20px, 0); }
         }
-        .scrolling-letters {
-            display: inline-block;
-            animation: scroll 0.5s linear infinite;
-        }
-        @keyframes scroll {
-            0% { opacity: 0; }
-            50% { opacity: 1; }
-            100% { opacity: 0; }
+        @keyframes glitch-letter {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
         }
         footer {
             margin-top: 30px;
@@ -127,12 +126,13 @@
             let currentIndex = 0;
             let previousIndex = phrases.length - 1; // Start with the last phrase
             const word1Element = document.querySelector('.glitch-word1');
-            const word2Element = document.querySelector('.glitch-word2');
+            const word2Element = document.querySelector('.fixed-word2');
 
             function createGlitchText(text, maxLength) {
                 let paddedText = text.padEnd(maxLength, ' ');
                 return paddedText.split('').map(letter => {
-                    return `<span class="glitch-letter" data-text="${letter}">${letter}</span>`;
+                    const delay = Math.random() * 2 + 's';
+                    return `<span class="glitch-letter" data-text="${letter}" style="animation-delay: ${delay};">${letter}</span>`;
                 }).join('');
             }
 
@@ -159,7 +159,6 @@
                 const maxLength = Math.max(oldWord1.length, newWord1.length);
 
                 word1Element.innerHTML = createGlitchText(phrases[currentIndex].word1, maxLength);
-                word2Element.textContent = phrases[currentIndex].word2;
 
                 const glitchLetters = word1Element.querySelectorAll('.glitch-letter');
                 glitchLetters.forEach((letter, index) => {
@@ -176,8 +175,8 @@
 </head>
 <body>
     <main>
-        <span class="glitch glitch-word1" data-text="dɇa†h">dɇa†h</span>, 
-        <span class="glitch glitch-word2" data-text="i†’s e∆sy">i†’s e∆sy</span>
+        <span class="glitch glitch-word1" data-text="dɇa†h">dɇa†h</span>
+        <span class="fixed-word2">, i†’s e∆sy</span>
     </main>
     <footer>
         <p>help@death-corp.com</p>
